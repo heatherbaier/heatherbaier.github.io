@@ -7,6 +7,9 @@ on:
       - '_talks/**'
       - 'talkmap.ipynb'
 
+permissions:
+  contents: write   # 👈 give workflow ability to push commits
+
 jobs:
   build:
     runs-on: ubuntu-latest
