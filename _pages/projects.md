@@ -21,34 +21,6 @@ GEDEx is a research-practice partnership focused on improving the quality, inter
 
 ---
 
-### Empirical Scale Recovery (ESR)
-*Novel methodological framework*
-
-ESR is a new research framework for inferring the geographic scale at which socioeconomic processes operate, using cross-resolution satellite imagery. By comparing model performance across spatial resolutions (e.g., Planet 3m vs. Sentinel-2 10m vs. Landsat 30m), ESR recovers the implicit scale of the underlying process — without requiring ground truth at multiple resolutions.
-
-A first paper applying ESR to education outcomes is in preparation.
-
----
-
-### Coordinate Uncertainty in GeoAI
-*Methods + equity implications*
-
-This project treats location as a noisy, probabilistic input rather than a fixed point. Using a continuous earth representation with a learned 2D Gaussian coordinate distribution and the reparameterization trick, we model coordinate uncertainty as input-space aleatoric uncertainty. A parallel paper examines how realistic positional error in GeoAI models produces inequitable prediction errors affecting Title I school funding eligibility.
-
-**Related outputs:**
-- Locational uncertainty methods paper *(targeting ACM SIGSPATIAL)*
-- Title I equity implications paper *(targeting Computers, Environment and Urban Systems)*
-- DHS geomasking diagnostic framework paper *(targeting GIScience & Remote Sensing)*
-
----
-
-### GNN-based EMIS Anomaly Detection
-*Transfer learning for education data integrity*
-
-This project trains a graph neural network on high-integrity U.S. NCES Common Core of Data (CCD) records and transfers to Philippine DepEd data to detect falsified statistical reporting. Schools are represented as nodes with spatial and administrative edges; anomaly scores flag records that deviate from expected patterns given spatial context.
-
----
-
 ### `geoetl`: Python Package for Geospatial ETL
 *Open source*
 
