@@ -18,27 +18,24 @@ author_profile: true
 
 ## Journal Articles
 
-**Baier, H.** & Runfola, D. (2025). SIMBA: Satellite-Inferred Multivariate Benchmark for Socioeconomic Assessment. *International Journal of Geographical Information Science*. *(submitted)*
+Baier, H., & Runfola, D. (2025). Addressing spatial imprecision in deep learning for satellite imagery-based socioeconomic predictions. GIScience & Remote Sensing, 62(1), 2540537.
+
+Baier, H., & Runfola, D. (2025, November). Measuring Feature Representation Stability in Coordinate-Conditioned Neural Networks. In Proceedings of the 8th ACM SIGSPATIAL International Workshop on AI for Geographic Knowledge Discovery (pp. 53-60).
+
+Runfola, D., Stefanidis, A., Lv, Z., O’Brien, J., & Baier, H. (2024). A multi-glimpse deep learning architecture to estimate socioeconomic census metrics in the context of extreme scope variance. International Journal of Geographical Information Science, 38(4), 726-750.
+
+Runfola, D., Baier, H., Mills, L., Naughton‐Rockwell, M., & Stefanidis, A. (2022). Deep learning fusion of satellite and social information to estimate human migratory flows. Transactions in GIS, 26(6), 2495-2518.
+
+Runfola, D., Stefanidis, A., & Baier, H. (2022). Using satellite data and deep learning to estimate educational outcomes in data-sparse environments. Remote Sensing Letters, 13(1), 87-97.
+
+Runfola, D., Anderson, A., Baier, H., Crittenden, M., Dowker, E., Fuhrig, S., ... & Hobbs, L. (2020). geoBoundaries: A global database of political administrative boundaries. PloS one, 15(4), e0231866.
 
 
 ---
 
 ## Conference Papers & Proceedings
 
-*Add your conference papers here.*
+Baier, H., & Runfola, D. (2024, October). Spatially adaptive convolutional networks with coordinate-conditioned layers. In Proceedings of the 32nd ACM International Conference on Advances in Geographic Information Systems (pp. 549-552).
 
----
-
-## Working Papers & Preprints
-
-*Add your working papers and preprints here.*
-
----
-
-## Book Chapters
-
-*Add any book chapters here.*
-
----
 
 *Last updated: {{ site.time | date: "%B %Y" }}*
