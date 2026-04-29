@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects · Heather Baier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:    #FAF5EE;
+      --cream-dk: #F0E8D8;
+      --terra:    #C05A35;
+      --terra-lt: #FAECE7;
+      --terra-dk: #8C3D20;
+      --lav:      #7F77DD;
+      --lav-lt:   #EEEDFE;
+      --lav-dk:   #3C3489;
+      --dusk:     #3D2E4A;
+      --dusk-md:  #5a4470;
+      --ink:      #241C2E;
+      --muted:    #7a6e84;
+      --border:   rgba(61,46,74,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 400;
+      color: var(--dusk); text-decoration: none; letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1.5px; background: var(--terra); transition: width 0.25s;
+    }
+    .nav-links a:hover { color: var(--dusk); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--dusk); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--terra); font-weight: 400; margin-bottom: 0.6rem;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+      color: var(--dusk); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .page-desc {
+      font-size: 0.95rem; color: var(--muted); max-width: 60ch; line-height: 1.8;
+    }
+
+    /* ── PROJECT LIST ── */
+    .project-list {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(61,46,74,0.1);
+    }
+
+    /* Colored side panel */
+    .card-side {
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      min-height: 240px;
+    }
+    .card-side.geo       { background: var(--dusk); }
+    .card-side.migration { background: var(--terra); }
+
+    .card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 400;
+      line-height: 1;
+      color: rgba(255,255,255,0.12);
+      user-select: none;
+    }
+    .card-category {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    /* Main body */
+    .card-body {
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--dusk);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 68ch;
+    }
+
+    /* Stats row */
+    .card-stats {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--dusk);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Chips */
+    .card-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      display: inline-block;
+      padding: 0.2rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.73rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .chip-lav   { background: var(--lav-lt); color: var(--lav-dk); }
+    .chip-terra { background: var(--terra-lt); color: var(--terra-dk); }
+
+    /* Action links */
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 0.25rem;
+    }
+    .action-link {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.35rem 0.9rem;
+      border-radius: 3px;
+      transition: all 0.18s;
+    }
+    .action-primary {
+      background: var(--dusk);
+      color: var(--lav-lt);
+    }
+    .action-primary:hover { background: var(--lav-dk); }
+    .action-primary.terra { background: var(--terra); }
+    .action-primary.terra:hover { background: var(--terra-dk); }
+    .action-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .action-outline:hover { border-color: var(--lav); color: var(--lav-dk); }
+
+    /* ── COMING SOON CARD ── */
+    .card-side.coming { background: var(--cream-dk); border-right: 1px solid var(--border); }
+    .card-number.muted { color: rgba(61,46,74,0.1); }
+    .card-category.muted-text { color: var(--muted); }
+    .coming-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .coming-badge {
+      display: inline-block;
+      padding: 0.2rem 0.75rem;
+      background: var(--cream-dk);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      align-self: flex-start;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream-dk);
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem; margin-top: 2rem;
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--dusk); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+      .card-side {
+        min-height: 100px;
+        flex-direction: row;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+      }
+      .card-number { font-size: 2.5rem; }
+      .card-body { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Heather Baier</a>
+    <ul class="nav-links">
+      <li><a href="/projects/" class="active">Projects</a></li>
+      <li><a href="/publications/">Publications</a></li>
+      <li><a href="/teaching/">Teaching</a></li>
+      <li><a href="/files/cv.pdf">CV</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="page-eyebrow">Research projects</p>
+    <h1 class="page-title">Projects</h1>
+    <p class="page-desc">
+      Active and ongoing research initiatives spanning geocoded education data,
+      deep learning for migration modeling, and GeoAI methods for socioeconomic outcomes.
+    </p>
+  </div>
+
+  <div class="project-list">
+
+    <!-- PROJECT 1: GEO -->
+    <div class="project-card">
+      <div class="card-side geo">
+        <div class="card-number">01</div>
+        <div class="card-category">Data &amp; Geocoding<br>Education Systems<br>International Development</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">GEO: Global Education Observatory</div>
+        <p class="card-desc">
+          A geocoded school database covering 23+ low- and middle-income countries, integrating Education Management Information Systems (EMIS) data with satellite-derived covariates. GEO supports research on educational equity, resource allocation, and learning outcomes across Sub-Saharan Africa, Southeast Asia, and beyond. Developed in collaboration with regional partners through the GEDEx Spencer Foundation RPP.
+        </p>
+
+        <div class="card-stats">
+          <div class="stat">
+            <span class="stat-value">23+</span>
+            <span class="stat-label">Countries</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Active sub-projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">2024</span>
+            <span class="stat-label">Data release</span>
+          </div>
+        </div>
+
+        <div class="card-chips">
+          <span class="chip chip-lav">open data</span>
+          <span class="chip chip-lav">geocoding</span>
+          <span class="chip chip-lav">education</span>
+          <span class="chip chip-lav">EMIS</span>
+        </div>
+
+        <div class="card-actions">
+          <a class="action-link action-primary" href="https://global-education-observatory.github.io/" target="_blank">Project site →</a>
+          <a class="action-link action-outline" href="https://dataverse.harvard.edu" target="_blank">Harvard Dataverse</a>
+          <a class="action-link action-outline" href="/publications/">Publications</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: Migration -->
+    <div class="project-card">
+      <div class="card-side migration">
+        <div class="card-number">02</div>
+        <div class="card-category">Deep Learning<br>Migration Modeling<br>Policy</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Push-and-Pull Factors in Cross-Border Migration with Deep Learning</div>
+        <p class="card-desc">
+          Modeling international migration flows using deep learning to identify and quantify push and pull factors across origin-destination country pairs. The project leverages large-scale socioeconomic, environmental, and conflict datasets to understand the drivers of cross-border movement — with implications for humanitarian response and migration policy.
+        </p>
+
+        <div class="card-chips" style="margin-top: 0.25rem;">
+          <span class="chip chip-lav">deep learning</span>
+          <span class="chip chip-lav">migration</span>
+          <span class="chip chip-lav">spatial modeling</span>
+          <span class="chip chip-terra">policy</span>
+          <span class="chip chip-terra">international</span>
+        </div>
+
+        <div class="card-actions">
+          <a class="action-link action-primary terra" href="#" target="_blank">Project site →</a>
+          <a class="action-link action-outline" href="/publications/">Publications</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: Coming soon placeholder -->
+    <div class="project-card" style="opacity: 0.6;">
+      <div class="card-side coming">
+        <div class="card-number muted">03</div>
+        <div class="card-category muted-text">Coming soon</div>
+      </div>
+      <div class="card-body coming-body">
+        <span class="coming-badge">In development</span>
+        <div class="card-title" style="color: var(--muted); font-size: 1rem;">New project coming soon</div>
+        <p class="card-desc" style="font-size: 0.85rem;">Details will appear here as the project develops.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-name">Heather Baier</span>
+    <span class="footer-copy">Assistant Professor · School of Geographical Sciences and Urban Planning · Arizona State University</span>
+  </footer>
+
+</body>
+</html>
