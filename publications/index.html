@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications · Heather Baier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:    #FAF5EE;
+      --cream-dk: #F0E8D8;
+      --terra:    #C05A35;
+      --terra-lt: #FAECE7;
+      --terra-dk: #8C3D20;
+      --lav:      #7F77DD;
+      --lav-lt:   #EEEDFE;
+      --lav-dk:   #3C3489;
+      --dusk:     #3D2E4A;
+      --dusk-md:  #5a4470;
+      --ink:      #241C2E;
+      --muted:    #7a6e84;
+      --border:   rgba(61,46,74,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 400;
+      color: var(--dusk); text-decoration: none; letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1.5px; background: var(--terra); transition: width 0.25s;
+    }
+    .nav-links a:hover { color: var(--dusk); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--dusk); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--terra); font-weight: 400; margin-bottom: 0.6rem;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+      color: var(--dusk); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .page-desc {
+      font-size: 0.95rem; color: var(--muted); max-width: 60ch; line-height: 1.8;
+    }
+    .page-desc a { color: var(--lav); text-decoration: none; }
+    .page-desc a:hover { text-decoration: underline; }
+
+    /* ── CONTROLS ── */
+    .controls {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-label {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-right: 0.25rem;
+    }
+    .filter-btn {
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .filter-btn:hover { border-color: var(--lav); color: var(--lav-dk); }
+    .filter-btn.active {
+      background: var(--lav-lt); border-color: var(--lav);
+      color: var(--lav-dk); font-weight: 500;
+    }
+
+    /* ── PUBLICATIONS LIST ── */
+    .pub-list {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+
+    /* Year group */
+    .year-group { margin-top: 3rem; }
+    .year-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 400; color: var(--dusk);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--terra);
+      display: inline-block;
+    }
+
+    /* Individual paper */
+    .pub-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 400;
+      color: var(--dusk); line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+    .pub-title a {
+      color: inherit; text-decoration: none;
+      background-image: linear-gradient(var(--lav), var(--lav));
+      background-size: 0 1px;
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+      transition: background-size 0.25s;
+    }
+    .pub-title a:hover { background-size: 100% 1px; }
+
+    .pub-citation {
+      font-size: 0.88rem; color: var(--muted); margin-bottom: 0.6rem;
+      line-height: 1.6;
+    }
+    .pub-citation em { font-style: italic; color: var(--ink); }
+
+    .pub-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .chip {
+      display: inline-block; padding: 0.2rem 0.7rem;
+      border-radius: 20px; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.02em;
+    }
+    .chip-lav   { background: var(--lav-lt); color: var(--lav-dk); }
+    .chip-terra { background: var(--terra-lt); color: var(--terra-dk); }
+
+    /* DOI / link button */
+    .pub-links { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-end; }
+    .pub-link {
+      font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border: 1px solid var(--border); border-radius: 3px;
+      padding: 0.25rem 0.6rem; white-space: nowrap;
+      transition: all 0.18s;
+    }
+    .pub-link:hover { border-color: var(--lav); color: var(--lav-dk); }
+
+    /* BibTeX toggle */
+    .bib-toggle {
+      font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); background: none; border: 1px solid var(--border);
+      border-radius: 3px; padding: 0.25rem 0.6rem;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: all 0.18s;
+    }
+    .bib-toggle:hover { border-color: var(--terra); color: var(--terra-dk); }
+
+    .bib-block {
+      display: none;
+      margin-top: 0.75rem;
+      background: var(--cream-dk);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--ink);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+      grid-column: 1 / -1;
+    }
+    .bib-block.open { display: block; }
+
+    /* Loading / error states */
+    .state-msg {
+      text-align: center; padding: 4rem 2rem;
+      color: var(--muted); font-size: 0.9rem;
+    }
+    .state-msg strong { display: block; font-size: 1.1rem; color: var(--dusk); margin-bottom: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream-dk); border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem; margin-top: 4rem;
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--dusk); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .pub-item { grid-template-columns: 1fr; }
+      .pub-links { flex-direction: row; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Heather Baier</a>
+    <ul class="nav-links">
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/publications/" class="active">Publications</a></li>
+      <li><a href="/teaching/">Teaching</a></li>
+      <li><a href="/files/cv.pdf">CV</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="page-eyebrow">Research output</p>
+    <h1 class="page-title">Publications</h1>
+    <p class="page-desc">
+      Peer-reviewed articles, data papers, and working papers.
+      Full list also on <a href="https://scholar.google.com" target="_blank">Google Scholar</a>.
+      Powered by <a href="../publications.bib" target="_blank"><code>publications.bib</code></a> —
+      add or update entries there to update this page.
+    </p>
+  </div>
+
+  <div class="controls" id="controls">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <!-- keyword filters injected by JS -->
+  </div>
+
+  <div class="pub-list" id="pub-list">
+    <div class="state-msg"><strong>Loading publications…</strong>Fetching publications.bib</div>
+  </div>
+
+  <footer>
+    <span class="footer-name">Heather Baier</span>
+    <span class="footer-copy">Assistant Professor · School of Geographical Sciences and Urban Planning · Arizona State University</span>
+  </footer>
+
+<script>
+// ─── BibTeX mini-parser ──────────────────────────────────────────────────────
+
+function parseBib(raw) {
+  const entries = [];
+  // Match each @type{key, ...} block
+  const entryRe = /@(\w+)\s*\{\s*([^,]+),\s*([\s\S]*?)(?=\n@|\s*$)/g;
+  let m;
+  while ((m = entryRe.exec(raw)) !== null) {
+    const type = m[1].toLowerCase();
+    if (type === 'comment' || type === 'string' || type === 'preamble') continue;
+    const key = m[2].trim();
+    const body = m[3];
+
+    const fields = {};
+    // Match field = {value} or field = "value" or field = number
+    const fieldRe = /(\w+)\s*=\s*(?:\{([\s\S]*?)\}|"([\s\S]*?)"|(\d+))(?=\s*,|\s*\}?\s*$)/g;
+    let f;
+    while ((f = fieldRe.exec(body)) !== null) {
+      const name = f[1].toLowerCase();
+      const val = (f[2] ?? f[3] ?? f[4] ?? '').trim()
+        .replace(/\\\&/g, '&')
+        .replace(/\\textit\{([^}]+)\}/g, '<em>$1</em>')
+        .replace(/\{([^}]+)\}/g, '$1'); // strip remaining braces
+      fields[name] = val;
+    }
+
+    entries.push({ type, key, ...fields, _raw: `@${m[1]}{${key},\n${body}}` });
+  }
+  return entries;
+}
+
+// ─── Status helpers ──────────────────────────────────────────────────────────
+
+const PUBLISHED_STATUSES = ['published', 'forthcoming', 'in press'];
+
+function isPublished(entry) {
+  const s = (entry.status || '').toLowerCase().trim();
+  // If no status field at all, assume published
+  if (!s) return true;
+  return PUBLISHED_STATUSES.some(p => s.includes(p));
+}
+
+function statusLabel(entry) {
+  const s = (entry.status || '').toLowerCase().trim();
+  if (s === 'forthcoming' || s === 'in press') return s;
+  return null; // published = no badge needed
+}
+
+// ─── Author formatting ───────────────────────────────────────────────────────
+
+function formatAuthors(raw) {
+  if (!raw) return '';
+  return raw
+    .split(/\s+and\s+/i)
+    .map(a => {
+      a = a.trim();
+      if (a.includes(',')) {
+        const [last, first] = a.split(',').map(s => s.trim());
+        return `${first} ${last}`;
+      }
+      return a;
+    })
+    .join(', ');
+}
+
+// ─── Citation string ─────────────────────────────────────────────────────────
+
+function buildCitation(e) {
+  const authors = formatAuthors(e.author);
+  const year = e.year || '';
+  const journal = e.journal || e.booktitle || e.publisher || '';
+  const vol = e.volume ? `, <em>${e.volume}</em>` : '';
+  const num = e.number ? `(${e.number})` : '';
+  const pages = e.pages ? `, ${e.pages.replace('--', '–')}` : '';
+  const doi = e.doi ? ` DOI: <a href="https://doi.org/${e.doi}" target="_blank">${e.doi}</a>` : '';
+
+  let parts = [];
+  if (authors) parts.push(authors);
+  if (year) parts.push(`(${year})`);
+  if (journal) parts.push(`<em>${journal}</em>${vol}${num}${pages}`);
+  if (doi) parts.push(doi);
+  return parts.join('. ');
+}
+
+// ─── Keyword → chip color ────────────────────────────────────────────────────
+
+// Alternate between lav and terra for visual variety
+const chipColorCache = {};
+let chipColorIndex = 0;
+const CHIP_COLORS = ['chip-lav', 'chip-terra'];
+
+function chipColor(kw) {
+  const k = kw.toLowerCase().trim();
+  if (!chipColorCache[k]) {
+    chipColorCache[k] = CHIP_COLORS[chipColorIndex % CHIP_COLORS.length];
+    chipColorIndex++;
+  }
+  return chipColorCache[k];
+}
+
+// ─── Render ──────────────────────────────────────────────────────────────────
+
+function render(entries, activeFilter) {
+  const list = document.getElementById('pub-list');
+
+  // Filter
+  let visible = entries.filter(isPublished);
+  if (activeFilter && activeFilter !== 'all') {
+    visible = visible.filter(e => {
+      const kws = (e.keywords || '').split(',').map(k => k.trim().toLowerCase());
+      return kws.includes(activeFilter.toLowerCase());
+    });
+  }
+
+  if (visible.length === 0) {
+    list.innerHTML = '<div class="state-msg"><strong>No results</strong>Try a different filter.</div>';
+    return;
+  }
+
+  // Group by year descending
+  const byYear = {};
+  visible.forEach(e => {
+    const y = e.year || 'n.d.';
+    if (!byYear[y]) byYear[y] = [];
+    byYear[y].push(e);
+  });
+
+  const years = Object.keys(byYear).sort((a, b) => b - a);
+
+  list.innerHTML = years.map(year => {
+    const pubs = byYear[year];
+    const items = pubs.map(e => {
+      const kws = (e.keywords || '').split(',').map(k => k.trim()).filter(Boolean);
+      const chips = kws.map(k => `<span class="chip ${chipColor(k)}">${k}</span>`).join('');
+      const title = e.url
+        ? `<a href="${e.url}" target="_blank">${e.title || 'Untitled'}</a>`
+        : (e.title || 'Untitled');
+
+      const badge = statusLabel(e)
+        ? `<span class="chip chip-terra" style="margin-left:0.5rem;font-size:0.7rem;">${statusLabel(e)}</span>`
+        : '';
+
+      const links = [];
+      if (e.doi) links.push(`<a class="pub-link" href="https://doi.org/${e.doi}" target="_blank">DOI</a>`);
+      if (e.url && !e.doi) links.push(`<a class="pub-link" href="${e.url}" target="_blank">Link</a>`);
+
+      const bibKey = `bib-${e.key}`;
+      const rawBib = e._raw
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      return `
+        <div class="pub-item" id="entry-${e.key}">
+          <div>
+            <div class="pub-title">${title}${badge}</div>
+            <div class="pub-citation">${buildCitation(e)}</div>
+            <div class="pub-chips">${chips}</div>
+          </div>
+          <div class="pub-links">
+            ${links.join('')}
+            <button class="bib-toggle" onclick="toggleBib('${bibKey}')">BibTeX</button>
+          </div>
+          <pre class="bib-block" id="${bibKey}">${rawBib}</pre>
+        </div>`;
+    }).join('');
+
+    return `<div class="year-group"><span class="year-heading">${year}</span>${items}</div>`;
+  }).join('');
+}
+
+function toggleBib(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ─── Keyword filter UI ───────────────────────────────────────────────────────
+
+function buildFilters(entries, activeFilter) {
+  const controls = document.getElementById('controls');
+  // Collect all keywords from published entries
+  const kwSet = new Set();
+  entries.filter(isPublished).forEach(e => {
+    (e.keywords || '').split(',').map(k => k.trim()).filter(Boolean).forEach(k => kwSet.add(k));
+  });
+
+  // Remove existing keyword buttons (keep All)
+  const existing = controls.querySelectorAll('[data-filter]:not([data-filter="all"])');
+  existing.forEach(b => b.remove());
+
+  [...kwSet].sort().forEach(kw => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (activeFilter === kw ? ' active' : '');
+    btn.dataset.filter = kw;
+    btn.textContent = kw;
+    controls.appendChild(btn);
+  });
+
+  // Wire up clicks
+  controls.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      controls.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(window._entries, btn.dataset.filter);
+    });
+  });
+}
+
+// ─── Load .bib ───────────────────────────────────────────────────────────────
+
+async function load() {
+  const list = document.getElementById('pub-list');
+  try {
+    // Path relative to this page — adjust if you move the .bib file
+    const res = await fetch('../publications.bib');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const raw = await res.text();
+    const entries = parseBib(raw);
+
+    if (entries.length === 0) {
+      list.innerHTML = '<div class="state-msg"><strong>No entries found</strong>Check that publications.bib is in the root folder and contains valid BibTeX entries.</div>';
+      return;
+    }
+
+    window._entries = entries;
+    buildFilters(entries, 'all');
+    render(entries, 'all');
+
+  } catch (err) {
+    list.innerHTML = `
+      <div class="state-msg">
+        <strong>Could not load publications.bib</strong>
+        When running locally, open via a local server (e.g. <code>python -m http.server</code>) rather than a file:// URL.
+        On GitHub Pages this will work automatically once <code>publications.bib</code> is in your repo root.<br><br>
+        <em style="font-size:0.8rem;opacity:0.7">${err.message}</em>
+      </div>`;
+  }
+}
+
+load();
+</script>
+
+</body>
+</html>
