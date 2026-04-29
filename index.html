@@ -1,26 +1,657 @@
----
-permalink: /
-title: "About"
-excerpt: "About me"
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heather Baier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
-I am an Assistant Professor at [Arizona State University's School of Geographical Sciences and Urban Planning (SGSUP)](https://geography.asu.edu/). My research sits at the intersection of GeoAI, satellite imagery, and spatial social science — with a focus on how machine learning models can be built, evaluated, and deployed responsibly for socioeconomic and international development applications.
+  <style>
+    :root {
+      --cream:    #FAF5EE;
+      --cream-dk: #F0E8D8;
+      --terra:    #C05A35;
+      --terra-lt: #FAECE7;
+      --terra-dk: #8C3D20;
+      --lav:      #7F77DD;
+      --lav-lt:   #EEEDFE;
+      --lav-dk:   #3C3489;
+      --dusk:     #3D2E4A;
+      --dusk-md:  #5a4470;
+      --ink:      #241C2E;
+      --muted:    #7a6e84;
+      --border:   rgba(61,46,74,0.12);
+    }
 
-My work spans several interconnected themes: predicting socioeconomic outcomes from remotely sensed data, understanding the downstream consequences of coordinate uncertainty and geomasking in GeoAI models, and improving education data systems (EMIS) in the Global South. I am particularly interested in how spatial data quality issues create inequitable prediction errors — and what we can do about it.
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-You can download my CV [here](/files/cv.pdf).
+    html { scroll-behavior: smooth; }
 
-## Research Interests
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+      min-height: 100vh;
+    }
 
-- GeoAI & machine learning for socioeconomic prediction
-- Satellite imagery analysis (Landsat, Sentinel, Planet)
-- Coordinate uncertainty and aleatoric input-space noise
-- International education data systems (Philippines, Cambodia, Nigeria)
-- Spatial data quality and equity implications
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+    }
 
-## News
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--dusk);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
 
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--terra);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--dusk); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: calc(100vh - 60px);
+      max-height: 800px;
+    }
+
+    .hero-left {
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--dusk);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--lav);
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 42ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bio strong {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      background: var(--dusk);
+      color: var(--lav-lt);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--lav-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--dusk);
+      color: var(--dusk);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dusk);
+      color: var(--lav-lt);
+    }
+
+    .hero-right {
+      background: var(--dusk);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 2rem;
+      gap: 1.25rem;
+    }
+
+    /* Decorative geo pattern in hero right */
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+    }
+
+    .hero-photo-placeholder {
+      position: relative;
+      z-index: 2;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid rgba(175,169,236,0.5);
+      background: var(--dusk-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .photo-initials {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--lav-lt);
+      opacity: 0.9;
+      line-height: 1;
+    }
+
+    .photo-hint {
+      font-size: 0.65rem;
+      color: rgba(238,237,254,0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Link boxes grid */
+    .hero-links {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .hero-link-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.9rem 0.5rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(175,169,236,0.2);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .hero-link-box:hover {
+      background: rgba(175,169,236,0.15);
+      border-color: rgba(175,169,236,0.5);
+    }
+
+    .hero-link-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .hero-link-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(238,237,254,0.7);
+    }
+
+    /* ── CHIPS ROW ── */
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--border);
+      background: var(--cream-dk);
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .chip-lav  { background: var(--lav-lt); color: var(--lav-dk); }
+    .chip-terra { background: var(--terra-lt); color: var(--terra-dk); }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--dusk);
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+    }
+
+    /* ── RESEARCH AREAS (3-col cards) ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .research-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .research-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(61,46,74,0.1);
+    }
+
+    .card-accent {
+      width: 32px;
+      height: 3px;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .accent-terra { background: var(--terra); }
+    .accent-lav   { background: var(--lav); }
+    .accent-dusk  { background: var(--dusk); }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--dusk);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── RECENT PAPERS ── */
+    .papers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .paper-item {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    .paper-item:first-child { border-top: 1px solid var(--border); }
+
+    .paper-year {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--terra);
+      letter-spacing: 0.04em;
+      padding-top: 0.2rem;
+    }
+
+    .paper-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--dusk);
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .paper-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .paper-tag {
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.1rem 0.6rem;
+      background: var(--lav-lt);
+      color: var(--lav-dk);
+      border-radius: 10px;
+      font-size: 0.72rem;
+      vertical-align: middle;
+    }
+
+    .paper-tag.under-review {
+      background: var(--terra-lt);
+      color: var(--terra-dk);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream-dk);
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--dusk);
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+    .hero-name    { animation: fadeUp 0.55s 0.08s ease both; }
+    .hero-bio     { animation: fadeUp 0.55s 0.16s ease both; }
+    .hero-actions { animation: fadeUp 0.55s 0.24s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        max-height: none;
+      }
+      .hero-right {
+        padding: 2rem 1.5rem;
+      }
+      .hero-photo-placeholder {
+        width: 120px;
+        height: 120px;
+      }
+      .photo-initials { font-size: 2rem; }
+      nav { padding: 0 1.25rem; }
+      .chips-row { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">Heather Baier</a>
+    <ul class="nav-links">
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/publications/">Publications</a></li>
+      <li><a href="/teaching/">Teaching</a></li>
+      <li><a href="/files/cv.pdf">CV</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Assistant Professor · Arizona State University</p>
+      <h1 class="hero-name">Heather<br><em>Baier</em></h1>
+      <p class="hero-bio">
+        I work at the intersection of <strong>GeoAI, satellite imagery,</strong> and <strong>spatial data science</strong> — applying machine learning to understand socioeconomic inequality, education systems, and development outcomes in low- and middle-income countries.
+      </p>
+      <div class="hero-actions">
+        <a href="/publications/" class="btn-primary">View Research</a>
+        <a href="mailto:heather.baier@asu.edu" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Decorative SVG grid pattern -->
+      <svg class="hero-pattern" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#AFA9EC" stroke-width="0.8"/>
+          </pattern>
+        </defs>
+        <rect width="600" height="600" fill="url(#grid)"/>
+        <circle cx="300" cy="300" r="180" fill="none" stroke="#AFA9EC" stroke-width="1"/>
+        <circle cx="300" cy="300" r="120" fill="none" stroke="#AFA9EC" stroke-width="0.6"/>
+        <circle cx="300" cy="300" r="60"  fill="none" stroke="#AFA9EC" stroke-width="0.6"/>
+        <line x1="0" y1="300" x2="600" y2="300" stroke="#AFA9EC" stroke-width="0.5"/>
+        <line x1="300" y1="0" x2="300" y2="600" stroke="#AFA9EC" stroke-width="0.5"/>
+      </svg>
+
+      <!-- Photo placeholder — swap src for your actual photo -->
+      <div class="hero-photo-placeholder">
+        <span class="photo-initials">HB</span>
+        <span class="photo-hint">Add photo</span>
+      </div>
+
+      <!-- Link boxes -->
+      <div class="hero-links">
+        <a class="hero-link-box" href="https://isearch.asu.edu/profile/4308562" target="_blank">
+          <span class="hero-link-icon">🏛</span>
+          <span class="hero-link-label">ASU Profile</span>
+        </a>
+        <a class="hero-link-box" href="https://scholar.google.com" target="_blank">
+          <span class="hero-link-icon">📖</span>
+          <span class="hero-link-label">Scholar</span>
+        </a>
+        <a class="hero-link-box" href="https://github.com/heatherbaier" target="_blank">
+          <span class="hero-link-icon">💻</span>
+          <span class="hero-link-label">GitHub</span>
+        </a>
+        <a class="hero-link-box" href="https://orcid.org" target="_blank">
+          <span class="hero-link-icon">🔬</span>
+          <span class="hero-link-label">ORCID</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEREST CHIPS -->
+  <div class="chips-row">
+    <span class="chip chip-lav">GeoAI</span>
+    <span class="chip chip-lav">Satellite imagery</span>
+    <span class="chip chip-lav">Spatial data science</span>
+    <span class="chip chip-lav">Graph neural networks</span>
+    <span class="chip chip-terra">Philippines</span>
+    <span class="chip chip-terra">Cambodia</span>
+    <span class="chip chip-terra">Nigeria</span>
+    <span class="chip chip-terra">Malawi</span>
+    <span class="chip chip-lav">Education systems</span>
+    <span class="chip chip-lav">Poverty estimation</span>
+    <span class="chip chip-lav">Coordinate uncertainty</span>
+  </div>
+
+  <!-- RESEARCH AREAS -->
+  <div class="section">
+    <p class="section-label">Focus Areas</p>
+    <h2 class="section-heading">What I work on</h2>
+    <div class="cards-grid">
+
+      <div class="research-card">
+        <div class="card-accent accent-lav"></div>
+        <div class="card-title">GeoAI for Socioeconomic Outcomes</div>
+        <p class="card-body">Developing spatial deep learning methods that connect satellite imagery to poverty, education access, and inequality — with attention to the failure modes that arise when AI meets messy human geography.</p>
+      </div>
+
+      <div class="research-card">
+        <div class="card-accent accent-terra"></div>
+        <div class="card-title">Education Data Systems</div>
+        <p class="card-body">Building and analyzing geocoded school databases across 23+ countries, studying how data quality, coordinate uncertainty, and EMIS reliability shape what we can learn about educational equity.</p>
+      </div>
+
+      <div class="research-card">
+        <div class="card-accent accent-dusk"></div>
+        <div class="card-title">Spatial Data Uncertainty</div>
+        <p class="card-body">Examining how imprecision in geolocation — from DHS geomasking to hundred-block address truncation — propagates through GeoAI pipelines and disproportionately affects marginalized communities.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECENT WORK -->
+  <div class="section">
+    <p class="section-label">Recent Work</p>
+    <h2 class="section-heading">Selected publications</h2>
+
+    <div class="papers-list">
+
+      <div class="paper-item">
+        <div class="paper-year">2025</div>
+        <div>
+          <div class="paper-title">Coordinate-only spatial imprecision as a diagnostic framework for GeoAI model reliability</div>
+          <div class="paper-meta"><em>Computers, Environment and Urban Systems</em> · Under review <span class="paper-tag under-review">Under review</span></div>
+        </div>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">2025</div>
+        <div>
+          <div class="paper-title">A multi-country geocoded school database: coverage, methodology, and open data release</div>
+          <div class="paper-meta"><em>Scientific Data</em> <span class="paper-tag under-review">In preparation</span></div>
+        </div>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">2025</div>
+        <div>
+          <div class="paper-title">Landscape-structured instability in GeoAI: geomasking effects across urban-rural gradients</div>
+          <div class="paper-meta"><em>GIScience &amp; Remote Sensing</em> <span class="paper-tag under-review">Under review</span></div>
+        </div>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">2024</div>
+        <div>
+          <div class="paper-title">SIMBA: Spatial Imprecision and Model Behavior Analysis for coordinate-perturbed pipelines</div>
+          <div class="paper-meta"><em>International Journal of Geographical Information Science</em> <span class="paper-tag under-review">Under revision</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a href="/publications/" class="btn-outline">All publications →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Heather Baier</span>
+    <span class="footer-copy">Assistant Professor · School of Geographical Sciences and Urban Planning · Arizona State University · Tempe, AZ</span>
+  </footer>
+
+</body>
+</html>
