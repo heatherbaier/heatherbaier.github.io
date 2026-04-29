@@ -312,7 +312,7 @@ function parseBib(raw) {
 
 // ─── Status helpers ──────────────────────────────────────────────────────────
 
-const PUBLISHED_STATUSES = ['published', 'forthcoming', 'in press'];
+const PUBLISHED_STATUSES = ['published'];
 
 function isPublished(entry) {
   const s = (entry.status || '').toLowerCase().trim();
